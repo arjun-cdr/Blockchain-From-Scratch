@@ -100,9 +100,9 @@ for block in blockchain:
 print("-----Running Validation Tests------")
 tamper_detector(blockchain)
     
-# print("....Simulating a hacker attack....")
-# blockchain[1].transactions[0]['amount'] = 9999999
-# print("Block #1 tampered. ")
-# tamper_detector(blockchain)
+print("....Simulating a hacker attack....")
+blockchain[1].transactions[0]['amount'] = 9999999
+print("Block #1 tampered. ")
+tamper_detector(blockchain)
 # blockchain[1].hash = "9999999"
 # tamper_detector(blockchain)
