@@ -41,34 +41,6 @@ class Block:
         print(f"Previous hash : {self.previous_hash}")
         print("-" * 35)
 
-
-def tamper_detector(blockchain):
-        """
-        loops through the blockchain to check for possible tampers(data integrity).
-        Returns True if the chain is secure, False if tampered with.
-        """
-        # starts from index1, since genesis block has no previous 
-        for i in range(1, len(blockchain)):
-            current_block = blockchain[i]
-            previous_block = blockchain[i-1]
-            
-            # Chain link check
-            if current_block.previous_hash != previous_block.hash :
-                print(f"Chain not linked.Link broken at Block#{current_block.index}  !!!!......")
-                return False
-            
-        for i in range(1, len(blockchain)):
-            current_block = blockchain[i]
-            
-            # Internal integrity check
-            current_hash = current_block.calculate_hash()
-            if current_hash != current_block.hash :
-                print(f"WARNING. Data tampered at Block #{current_block.index}!!!!........")
-                return False
-        
-        print("Blockchain is Secure. ")
-        return True
-
 blockchain = []
 
 # GENESIS BLOCK
