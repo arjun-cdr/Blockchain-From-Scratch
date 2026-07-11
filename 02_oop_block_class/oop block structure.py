@@ -1,4 +1,5 @@
-# Block Class that stores an index, a timestamp, a list of transactions, and a pointer to the previous block
+# Block Class that stores an index, a timestamp, a list of transactions, 
+# and a pointer to the previous block
 import time
 
 class Block:
