@@ -121,19 +121,3 @@ tx2 = [
 block2 = Block(2, tx2, block1.hash)
 block2.mine_block(difficulty)
 blockchain.append(block2)
-
-
-# # displaying output through iteration
-# for block in blockchain:
-#     block.print_block()
-
-# print("-----Running Validation Tests------")
-# tamper_detector(blockchain)
-
-# print("....Simulating a hacker attack....")
-# blockchain[1].transactions[0]["amount"] = 9999999
-# print("Block #1 tampered. ")
-# tamper_detector(blockchain)
-
-# blockchain[1].hash = "9999999"
-# tamper_detector(blockchain)
