@@ -1,3 +1,5 @@
+# mines a block with a difficulty that works as a proof of work resulting in variable timestamps 
+
 import hashlib
 import json
 import time
