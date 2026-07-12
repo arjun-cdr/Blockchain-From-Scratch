@@ -113,13 +113,14 @@ block1 = Block(1, tx1, genesis_block.hash)
 block1.mine_block(difficulty)
 blockchain.append(block1)
 
-# tx2 = [
-#     {"sender": "Messi", "receiver": "Ronaldo", "amount": 0},
-#     {"sender": "Ronaldo", "receiver": "Neymar", "amount": 50},
-#     {"sender": "Suarez", "receiver": "Zlatan", "amount": 1000},
-# ]
-# block2 = Block(2, tx2, block1.hash)
-# blockchain.append(block2)
+tx2 = [
+    {"sender": "Messi", "receiver": "Ronaldo", "amount": 0},
+    {"sender": "Ronaldo", "receiver": "Neymar", "amount": 50},
+    {"sender": "Suarez", "receiver": "Zlatan", "amount": 1000},
+]
+block2 = Block(2, tx2, block1.hash)
+block2.mine_block(difficulty)
+blockchain.append(block2)
 
 
 # # displaying output through iteration
