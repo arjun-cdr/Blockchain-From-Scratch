@@ -1,4 +1,6 @@
-# Concept : If blocks are mined too fast, the system automatically increases the difficulty (e.g., changing the target from 000 to 0000). If they take too long, it lowers the difficulty.
+# Concept : If blocks are mined too fast, the system automatically increases the difficulty 
+# (e.g., changing the target from 000 to 0000). 
+# If they take too long, it lowers the difficulty.
 import hashlib
 import json
 import time
