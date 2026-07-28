@@ -142,6 +142,34 @@ def extract_list_of_peers():
             
     return {"SUCCESS": "NEW NODE REGISTERED", "total list of registered peers": list(PEERS)}
 
+# P2P CONSESUS SYNC
+@app.route("/nodes/sync", methods = ["GET", "POST"])
+def resolve():
+    global blockchain
+    longest_chain = None
+    max_length = len(blockchain)
+    chain_was_replaced = False
+    
+    for peer in PEERS:
+        try:
+            response = requests.get(f"{peer}/chain")
+            if response.status_code == 200:
+                chain = response.json()["chain"]
+                length = response.json()["length"]
+                
+                if length > max_length and blockchain.is_chain_valid(chain):
+                    max_length = length
+                    longest_chain = chain
+        except requests.exceptions.RequestException:
+            continue
+    if longest_chain != None:
+        blockchain = longest_chain
+        chain_was_replaced = True
+    if chain_was_replaced == True:
+        return "Local Chain was replaced with the longer valid chain", 200
+    else:
+        return "Local Chain is already authoritative; no update needed", 200
+
 parser = argparse.ArgumentParser(description="Start network server on a custom port.")
 parser.add_argument("-p","--port", type=int, default = 5000)
 args = parser.parse_args()
