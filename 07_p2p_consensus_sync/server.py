@@ -46,6 +46,7 @@ def is_chain_valid(chain_to_check):
 # Global Node States
 blockchain = []
 difficulty = 3
+pending_transactions = []
 
 # Bootstrapping: Auto-mine Genesis Block right on startup
 genesis_block = Block(0, [{"data": "Genesis Ledger Initialized"}], "0")
@@ -81,8 +82,6 @@ def get_chain():
     return jsonify({"chain":chain_data,"length" : len(chain_data)})
 
 # Route-2 Adds new transactions
-
-pending_transactions = []
 @app.route("/transactions/new", methods = ['GET','POST'])
 def new_transaction():
     """
@@ -113,10 +112,14 @@ def mine():
     global pending_transactions, blockchain
     if len(pending_transactions) != 0:
         last_block = blockchain[-1]
+        if isinstance(last_block, dict):
+            last_hash = last_block["hash"]
+        else:
+            last_hash = last_block.hash
         new_block = Block(
             index = len(blockchain),
             transactions=pending_transactions,
-            previous_hash=last_block.hash
+            previous_hash=last_hash
         )
         new_block.mine_block(difficulty)
         blockchain.append(new_block)
