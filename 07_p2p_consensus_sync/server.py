@@ -4,6 +4,9 @@ import json
 import hashlib
 import argparse
 
+# Initialize Flask
+app = Flask(__name__)
+
 class Block:
     def __init__(self, index, transactions, previous_hash):
         self.index = index
@@ -26,21 +29,19 @@ class Block:
 
 # Chain Validator
 def is_chain_valid(chain_to_check):
-        for i in range(1, len(chain_to_check)):
-            current_block = chain_to_check[i]
-            previous_block = chain_to_check[i-1]
+    for i in range(1, len(chain_to_check)):
+        current_block = chain_to_check[i]
+        previous_block = chain_to_check[i-1]
             
-            # Rule 1: Check if the chain link is broken
-            if current_block["previous_hash"] != previous_block["hash"]:
-                return False
-            
-            # Rule 2: Check if Proof of Work was actually done
-            if not current_block["hash"].startswith(difficulty):
-                return False
-        return True
+        # Rule 1: Check if the chain link is broken
+        if current_block["previous_hash"] != previous_block["hash"]:
+            return False
+        
+        # Rule 2: Check if Proof of Work was actually done
+        if not current_block["hash"].startswith(difficulty):
+            return False
+    return True 
 
-# Initialize Flask
-app = Flask(__name__)
 
 # Global Node States
 blockchain = []
