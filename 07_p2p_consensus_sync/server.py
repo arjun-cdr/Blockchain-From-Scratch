@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import time
 import json
 import hashlib
+import argparse
 
 class Block:
     def __init__(self, index, transactions, previous_hash):
@@ -127,6 +128,9 @@ def extract_list_of_peers():
             
     return {"SUCCESS": "NEW NODE REGISTERED", "total list of registered peers": PEERS}
 
-# @app.route("/chain", methods = ["GET"])
-# def chain_data():
-#     pass
+parser = argparse.ArgumentParser(description="Start network server on a custom port.")
+parser.add_argument("-p","--port", type=int, default = 5000)
+args = parser.parse_args()
+
+if __name__ ==  "__main__":
+    app.run(host = '127.0.0.1',port = args.port)
