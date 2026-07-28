@@ -29,12 +29,6 @@ app = Flask(__name__)
 # Global Node States
 blockchain = []
 difficulty = 3
-# target_mine_time = 0.5
-# if(time_spent < target_mine_time):
-#     current_difficulty += 1
-# else:
-#     if current_difficulty >= 2:
-#         current_difficulty -=1
 
 # Bootstrapping: Auto-mine Genesis Block right on startup
 genesis_block = Block(0, [{"data": "Genesis Ledger Initialized"}], "0")
@@ -50,7 +44,7 @@ block1 = Block(1, tx1, genesis_block.hash)
 block1.mine_block(difficulty)
 blockchain.append(block1)
 
-# Route-1 Building chain end-point and viewing chain
+# Route-1 Building chain end-point and VIEWING CHAIN
 @app.route("/chain", methods = ['GET'])
 def get_chain():
     """
