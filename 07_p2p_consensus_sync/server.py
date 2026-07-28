@@ -47,6 +47,7 @@ def is_chain_valid(chain_to_check):
 blockchain = []
 difficulty = 3
 pending_transactions = []
+PEERS = set()
 
 # Bootstrapping: Auto-mine Genesis Block right on startup
 genesis_block = Block(0, [{"data": "Genesis Ledger Initialized"}], "0")
@@ -130,11 +131,8 @@ def mine():
 if __name__ ==  "__main__":
     app.run(host = '127.0.0.1',port=5000)
 
-
-PEERS = set()
-my_port = '127.0.0.1:5000'
-app = Flask(__name__)
-@app.route("/nodes/register", methods = ['GET', 'POST'])
+# Register PEERS
+@app.route("/nodes/register", methods = ['POST'])
 def extract_list_of_peers():
     nodes = request.get_json().get("nodes")
     
@@ -142,10 +140,10 @@ def extract_list_of_peers():
         return "Invalid data provided", 400
     
     for node in nodes:
-        if node not in PEERS and my_port:
+        if node not in PEERS and node not in str(args.port) :
             PEERS.add(node)
             
-    return {"SUCCESS": "NEW NODE REGISTERED", "total list of registered peers": PEERS}
+    return {"SUCCESS": "NEW NODE REGISTERED", "total list of registered peers": list(PEERS)}
 
 parser = argparse.ArgumentParser(description="Start network server on a custom port.")
 parser.add_argument("-p","--port", type=int, default = 5000)
