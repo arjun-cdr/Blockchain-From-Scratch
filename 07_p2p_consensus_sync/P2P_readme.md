@@ -1,4 +1,4 @@
-## IMPORTANT COMMANDS ##
+# IMPORTANT COMMANDS #
 
 # For Node 1 (Port 5000)
 1. curl.exe http://127.0.0.1:5000/chain
