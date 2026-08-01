@@ -3,6 +3,9 @@ import time
 import json
 import hashlib
 
+# Initialize Flask
+app = Flask(__name__)
+
 class Block:
     def __init__(self, index, transactions, previous_hash):
         self.index = index
@@ -23,8 +26,6 @@ class Block:
             self.nonce += 1
             self.hash = self.calculate_hash()
 
-# Initialize Flask
-app = Flask(__name__)
 
 # Global Node States
 blockchain = []
