@@ -27,7 +27,7 @@ class Web3_Provider:
             return False
     
     # Private method : The Engine room 
-    def __send_request(self, endpoint, methods,  payload):
+    def __send_request(self, endpoint, methods,  payload = None):
         
         # Combining node url with endpoint 
         target_url = self.node_url + endpoint
@@ -39,7 +39,7 @@ class Web3_Provider:
                 response = requests.get(target_url)
                 
             if response.status_code == 200:
-                return json.loads(response)
+                return response.json()
             else:
                 print("Node returned status code :", response.status_code)
                 return
@@ -55,7 +55,7 @@ class Web3_Provider:
 
     # Fetching Blockchain Length
     def get_block_height(self):
-        chain = self.get_chain
+        chain = self.get_chain()
         return len(chain["chain"])
 
     # Bundles transactions and send it to mempool
@@ -65,8 +65,23 @@ class Web3_Provider:
             "receiver" : receiver,
             "amount" : amount
         }
-        return self.__send_request("/transactions/new", methods = "POST", payload = payload)
+        return self._send_request("/transactions/new", method = "POST", payload = payload)
 
     # Method to trigger a new Mine-Block
     def trigger_mine(self):
-        return self.__send_request("/mine", methods = "POST")
+        return self._send_request("/mine", method = "POST")
+
+
+# Manual Test Script
+
+provider = Web3_Provider("http://127.0.0.1:5000")
+
+if provider.is_connected():
+    print("Connected to the node....")
+    print(provider.send_transaction("Billy", "Homelander", 8000))
+    print(provider.trigger_mine())
+    print(provider.get_chain())
+    print(provider.get_block_height())
+
+else:
+    print("Node is Unreachable.....")
