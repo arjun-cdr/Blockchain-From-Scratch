@@ -66,3 +66,7 @@ class Web3_Provider:
             "amount" : amount
         }
         return self.__send_request("/transactions/new", methods = "POST", payload = payload)
+
+    # Method to trigger a new Mine-Block
+    def trigger_mine(self):
+        return self.__send_request("/mine", methods = "POST")
