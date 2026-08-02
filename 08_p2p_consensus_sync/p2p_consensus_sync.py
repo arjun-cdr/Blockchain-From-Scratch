@@ -27,8 +27,9 @@ class Block:
         while not self.hash.startswith(target):
             self.nonce += 1
             self.hash = self.calculate_hash()
-
-# Chain Validator
+      
+      
+# Chain Validator Functiom
 def is_chain_valid(chain_to_check):
     for i in range(1, len(chain_to_check)):
         current_block = chain_to_check[i]
@@ -41,7 +42,7 @@ def is_chain_valid(chain_to_check):
         # Rule 2: Check if Proof of Work was actually done
         if not current_block["hash"].startswith(difficulty):
             return False
-    return True 
+    return True      
 
 
 # Global Node States
@@ -64,7 +65,7 @@ block1 = Block(1, tx1, genesis_block.hash)
 block1.mine_block(difficulty)
 blockchain.append(block1)
 
-# Route-1 Building chain end-point and VIEWING CHAIN
+# Route-1 Building chain end-point and viewing chain
 @app.route("/chain", methods = ['GET'])
 def get_chain():
     """
@@ -72,19 +73,12 @@ def get_chain():
     Extracts each block's properties into a normal dictionary.
     Appends that dictionary to the 'chain_data' list.
     """
-    chain_data = []
+    chain_data = [block.__dict__ for block in blockchain]
     
-    for block in blockchain:
-        chain_data.append({'index': block.index, 
-                           'hash' : block.hash, 
-                           'transactions': block.transactions, 
-                           'previous_hash' : block.previous_hash,
-                           'timestamp': block.timestamp, 
-                           'nonce' : block.nonce})
-    return jsonify({"chain":chain_data,"length" : len(chain_data)})
+    return jsonify({"chain":chain_data,"length" : len(chain_data), "status":200})
 
 # Route-2 Adds new transactions
-@app.route("/transactions/new", methods = ['GET','POST'])
+@app.route("/transactions/new", methods = ['POST'])
 def new_transaction():
     """
     Grabs incoming data using request.get_json().
@@ -102,7 +96,7 @@ def new_transaction():
     return jsonify({"message":"Transaction added !!"})
 
 # Route-3 Mine pending transactions
-@app.route("/mine", methods = ['GET'])
+@app.route("/mine", methods = ['POST'])
 def mine():
     """
     Ensure pending_transactions is not empty.
@@ -128,8 +122,8 @@ def mine():
         pending_transactions=[]
         
     return jsonify({"message": "New block successfully forged!"})
-
-# Register PEERS
+    
+# Register Peers
 @app.route("/nodes/register", methods = ['POST'])
 def extract_list_of_peers():
     nodes = request.get_json().get("nodes")
@@ -170,7 +164,8 @@ def resolve():
         return "Local Chain was replaced with the longer valid chain", 200
     else:
         return "Local Chain is already authoritative; no update needed", 200
-
+        
+        
 parser = argparse.ArgumentParser(description="Start network server on a custom port.")
 parser.add_argument("-p","--port", type=int, default = 5000)
 args = parser.parse_args()
