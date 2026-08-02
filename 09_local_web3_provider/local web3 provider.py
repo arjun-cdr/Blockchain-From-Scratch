@@ -52,3 +52,8 @@ class Web3_Provider:
     # Fetching the blockchain
     def get_chain(self):
         return self._send_request("/chain", methods = "GET")
+
+    # Fetching Blockchain Length
+    def get_block_height(self):
+        chain = self.get_chain
+        return len(chain["chain"])
