@@ -48,5 +48,7 @@ class Web3_Provider:
             raise ConnectionError(f"Failed to connect to local node....{e}")
         except TimeoutError:
             raise "Node request timed out...."
-        
-    
+
+    # Fetching the blockchain
+    def get_chain(self):
+        return self._send_request("/chain", methods = "GET")
