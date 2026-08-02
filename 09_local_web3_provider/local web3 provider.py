@@ -57,3 +57,12 @@ class Web3_Provider:
     def get_block_height(self):
         chain = self.get_chain
         return len(chain["chain"])
+
+    # Bundles transactions and send it to mempool
+    def send_transaction(self, sender, receiver, amount):
+        payload = {
+            "sender" : sender,
+            "receiver" : receiver,
+            "amount" : amount
+        }
+        return self.__send_request("/transactions/new", methods = "POST", payload = payload)
