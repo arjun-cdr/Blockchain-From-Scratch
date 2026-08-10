@@ -2,3 +2,4 @@
 <h4>A modular, decentralized blockchain built from first principles in Python. This repository traces the progression from basic data structures to core cryptographic validation, Proof-of-Work (PoW) consensus, decentralized P2P synchronization, and Web3 smart contract integration. </h4>
 
 <h3>Technical Features Overview</h3>
+<h4>1. Transaction Ledger Management: State handling and execution of transaction schemas using native data structures.</h4>
