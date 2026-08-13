@@ -10,3 +10,5 @@
 <p>6. Adaptive Difficulty Adjustment: Dynamic target retargeting based on rolling block time metrics to stabilize throughput.</p>
 <p>7. RESTful Node API (Flask/FastAPI): HTTP interface for peer discovery, transaction broadcasting, and state querying.</p>
 <p>8. P2P Consensus & Sync Protocol: Conflict resolution mechanism enforcing the Longest Valid Chain rule across network nodes.</p>
+<p>8. P2P Consensus & Sync Protocol: Conflict resolution mechanism enforcing the Longest Valid Chain rule across network nodes.</p>
+<p>8. P2P Consensus & Sync Protocol: Conflict resolution mechanism enforcing the Longest Valid Chain rule across network nodes.</p>
