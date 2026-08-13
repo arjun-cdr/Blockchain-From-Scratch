@@ -14,3 +14,6 @@
 <p>10. Automated Smart Contract Engine: Programmatic compilation, deployment, and interaction with EVM smart contracts using Python.</p>
 
 <h2>Project Structure & Implementation Details</h2>
+Phase 1: Core Python Fundamentals
+    Module 01: The Transaction Ledger (01_ledger.py)
+    Implements structural validation rules for pending transactions before placing them in the mempool. Checks sender signatures, structural completeness, and            balance sufficiency.
