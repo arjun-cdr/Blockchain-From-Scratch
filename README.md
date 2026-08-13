@@ -12,3 +12,5 @@
 <p>8. P2P Consensus & Sync Protocol: Conflict resolution mechanism enforcing the Longest Valid Chain rule across network nodes.</p>
 <p>9. Local Web3 Provider Interface: RPC integration over JSON-RPC endpoints to query local accounts and execute state calls via web3.py.</p>
 <p>10. Automated Smart Contract Engine: Programmatic compilation, deployment, and interaction with EVM smart contracts using Python.</p>
+
+<h2>Project Structure & Implementation Details</h2>
